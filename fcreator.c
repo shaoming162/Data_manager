@@ -21,10 +21,10 @@
 #define SET_MAX_TEMP	24	// generate log event if running avg becomes bigger
 #define NUM_AVG		5
 
-#define MAP_FILE room_sensor.map
-#define DATA_FILE sensor_data
-#define DATA_FILE_TEXT sensor_data_text  // only for debugging
-#define LOG_FILE log
+#define MAP_FILE "room_sensor.map"
+#define DATA_FILE "sensor_data"
+#define DATA_FILE_TEXT "sensor_data_text"  // only for debugging
+#define LOG_FILE "log"
 
 uint16_t room_id[NUM_SENSORS] = {1,2,3,4,11,12,13,14};
 uint16_t sensor_id[NUM_SENSORS] = {1,2,3,4,5,6,7,8};
