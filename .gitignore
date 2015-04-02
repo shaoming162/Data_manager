@@ -30,3 +30,8 @@
 
 # Debug files
 *.dSYM/
+
+# Generated files
+room_sensor.map
+sensor_data
+log
