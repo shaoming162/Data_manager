@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include "datamgr.h"
+// #include "list.h"
 
 int list_errno;
 
@@ -24,7 +26,7 @@ void element_free(element_ptr_t *element)
  */
 void element_print(element_ptr_t element)
 {
-
+	//printf("Sensor ID: %" PRIu16 " Room ID: %" PRIu16 " Avg Temp: %f Last modified: %d\n", element->sensor_id, element->room_id, element->running_avg, element->last_modified);
 }
 
 /*
@@ -33,4 +35,13 @@ void element_print(element_ptr_t element)
 int element_compare(element_ptr_t x, element_ptr_t y)
 {
 
+}
+
+int main(int argc, char const *argv[])
+{
+	list_ptr_t list = list_create( &element_copy, &element_free, &element_compare, &element_print );
+	initialize_pointer_list(list);
+	// list_print(list);
+
+	return 0;
 }

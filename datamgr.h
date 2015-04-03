@@ -1,3 +1,5 @@
+#include "list.h"
+
 #ifndef DATAMGR_H_
 #define DATAMGR_H_
 
@@ -10,7 +12,7 @@
 
 typedef struct data data_t;
 
-double sensor_temperature[NUM_SENSORS][NUM_AVG] = {0}; // 2D array to keep the most recent 5 temp for each sensor
+double sensor_temperature[NUM_SENSORS][NUM_AVG];// = {0}; // 2D array to keep the most recent 5 temp for each sensor
 
 // Read from MAP_FILE and populate the list
 list_ptr_t initialize_pointer_list( list_ptr_t list );
