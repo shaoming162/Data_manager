@@ -31,7 +31,7 @@ void element_free(element_ptr_t *element)
  */
 void element_print(element_ptr_t element)
 {
-	printf("Sensor ID: %" PRIu16 " Room ID: %" PRIu16 " Avg Temp: %f Last modified: %d\n", ((sensor_node_t*)element)->sensor_id, ((sensor_node_t*)element)->room_id, ((sensor_node_t*)element)->running_avg, ((sensor_node_t*)element)->last_modified);
+	printf("Sensor ID: %" PRIu16 " Room ID: %" PRIu16 " Avg Temp: %g Last modified: %ld\n", ((sensor_node_t*)element)->sensor_id, ((sensor_node_t*)element)->room_id, ((sensor_node_t*)element)->running_avg, (long)((sensor_node_t*)element)->last_modified);
 }
 
 /*
@@ -39,17 +39,18 @@ void element_print(element_ptr_t element)
  */
 int element_compare(element_ptr_t x, element_ptr_t y)
 {
-
+	return 0;
 }
 
 int main(int argc, char const *argv[])
 {
 	list_ptr_t list = list_create( &element_copy, &element_free, &element_compare, &element_print );
 	initialize_pointer_list(list);
-	list_print(list);
+	// list_print(list);
 	// sensor_node_t* e = (sensor_node_t*)list_get_element_at_index(list, 0);
 	// printf("Sensor ID: %" PRIu16 "\n", e->sensor_id);
 
+	read_data(list);
 
 	return 0;
 }

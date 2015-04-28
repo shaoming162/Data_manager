@@ -1,16 +1,8 @@
 #include <stdio.h>
-// #include <stdlib.h>
 #include <inttypes.h>
 #include "datamgr.h"
 #include "list.h"
 
-// struct sensor_node
-// {
-// 	uint16_t sensor_id;
-// 	uint16_t room_id;
-// 	double running_avg;
-// 	time_t last_modified;
-// };
 
 // Read from MAP_FILE and populate the list
 list_ptr_t initialize_pointer_list( list_ptr_t list )
@@ -21,11 +13,11 @@ list_ptr_t initialize_pointer_list( list_ptr_t list )
 	FILE* fp;
 	fp = fopen(MAP_FILE, "r");	// r for read
 	if(fp == NULL) {
-		printf("Couldn't open sensor_data\n");
+		printf("Couldn't open MAP_FILE\n");
 	    exit(EXIT_FAILURE);
 	}
 	uint16_t room_id, sensor_id;
-	while (!feof(fp)) {
+	while(!feof(fp)) {
 		if(fscanf(fp, "%" SCNu16 " %" SCNu16, &room_id, &sensor_id) == 2) {
 			// printf("%" PRIu16 " %" PRIu16 "\n", room_id, sensor_id);
 			sensor_node->sensor_id = sensor_id;
@@ -34,10 +26,37 @@ list_ptr_t initialize_pointer_list( list_ptr_t list )
 		}
 	}
 
+	free(sensor_node);
+
 	return list;
 }
 
 // Read data from DATA_FILE and update the sensor_node list
 list_ptr_t read_data( list_ptr_t list ){
+	FILE* fp;
+	fp = fopen(DATA_FILE, "rb");
+	if (!fp) {
+		printf("Couldn't open DATA_FILE\n");
+		exit(EXIT_FAILURE);
+	}
+	uint16_t sensor_id;
+	double temp;
+	time_t timestamp;
 
+	while(!feof(fp)) {
+		fread(&sensor_id, sizeof(uint16_t), 1, fp);
+		printf("sensor id: %" PRIu16 "\t", sensor_id);
+
+		fread(&temp, sizeof(double), 1, fp);
+		printf("temperature: %g\t", temp);
+
+		fread(&timestamp, sizeof(time_t), 1, fp);
+		printf("timestamp: %ld\n", timestamp);
+	}
+
+	// fread(&sensor_id_2, sizeof(uint16_t), 1, fp);
+	// printf("sensor id: %" PRIu16 "\n", sensor_id_2);
+
+
+	return list;
 }
