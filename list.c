@@ -84,7 +84,7 @@ list_ptr_t list_insert_at_index( list_ptr_t list, element_ptr_t element, int ind
 	}
 
 	list->element_copy(&(new_node->element), element);
-	list->element_free(&element);
+	// list->element_free(&element);
 	
 	if(list_size(list) == 0) {		// Empty list
 		list->head = new_node;
