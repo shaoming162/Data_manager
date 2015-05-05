@@ -46,11 +46,14 @@ int main(int argc, char const *argv[])
 {
 	list_ptr_t list = list_create( &element_copy, &element_free, &element_compare, &element_print );
 	initialize_pointer_list(list);
-	// list_print(list);
+	 //list_print(list);
 	// sensor_node_t* e = (sensor_node_t*)list_get_element_at_index(list, 0);
 	// printf("Sensor ID: %" PRIu16 "\n", e->sensor_id);
 
 	read_data(list);
-
+    list_print(list);
+    
+    
+		
 	return 0;
 }
