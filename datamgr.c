@@ -43,7 +43,7 @@ list_ptr_t read_data( list_ptr_t list ) {
     uint16_t sensor_id;
     double temp;
     time_t timestamp;
-    int i, j;
+    int i, j, sensor_found = 0;
     double sum = 0;
     sensor_node_t* sensor_node;
     int size = list_size(list);
@@ -59,6 +59,7 @@ list_ptr_t read_data( list_ptr_t list ) {
         for (i = 0; i < size; i++) {
             sensor_node = list_get_element_at_index(list, i);
             if (sensor_node->sensor_id == sensor_id) {
+                sensor_found = 1;
                 sensor_node->rencent_measurements[sensor_node->num_of_measurements % NUM_AVG] = temp;
                 sensor_node->num_of_measurements++;
                 sensor_node->last_modified = timestamp;
@@ -68,7 +69,6 @@ list_ptr_t read_data( list_ptr_t list ) {
                     }
                     sensor_node->running_avg = sum / NUM_AVG;
                     sum = 0;
-                    // printf("running_avg = %f\n", sensor_node->running_avg);
                     if (sensor_node->running_avg > SET_MAX_TEMP) {
                         fprintf(stderr, "Room %" PRIu16 " is too hot\n", sensor_node->room_id);
                     }
@@ -79,6 +79,12 @@ list_ptr_t read_data( list_ptr_t list ) {
                 break;
             }
         }
+
+        if (!sensor_found) {
+            fprintf(stderr, "Sensor data of sensor %" PRIu16 " is ignored\n", sensor_id);
+        }
+
+        sensor_found = 0;
     }
 
     fclose(fp);
