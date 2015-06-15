@@ -67,11 +67,13 @@ list_ptr_t read_data( list_ptr_t list ) {
                         sum += sensor_node->rencent_measurements[j];
                     }
                     sensor_node->running_avg = sum / NUM_AVG;
-                    if (sensor_node->running_avg > MAX_TEMP) {
-                        fprintf(stderr, "The temperaure in No.%" PRIu16 " room is too high.\n", sensor_node->room_id);
+                    sum = 0;
+                    // printf("running_avg = %f\n", sensor_node->running_avg);
+                    if (sensor_node->running_avg > SET_MAX_TEMP) {
+                        fprintf(stderr, "Room %" PRIu16 " is too hot\n", sensor_node->room_id);
                     }
-                    if (sensor_node->running_avg < MIN_TEMP) {
-                        fprintf(stderr, "The temperaure in No.%" PRIu16 " room is too low.\n", sensor_node->room_id);
+                    if (sensor_node->running_avg < SET_MIN_TEMP) {
+                        fprintf(stderr, "Room %" PRIu16 " is too cold\n", sensor_node->room_id);
                     }
                 }
                 break;

@@ -4,16 +4,9 @@
 #ifndef DATAMGR_H_
 #define DATAMGR_H_
 
-#define NUM_SENSORS 8
 #define NUM_AVG 5
-#define NUM_MEASUREMENTS 8
-
 #define MAP_FILE "room_sensor.map"
 #define DATA_FILE "sensor_data"
-#define LOG_FILE "log"
-
-#define MIN_TEMP 17
-#define MAX_TEMP 23
 
 typedef struct sensor_node
 {

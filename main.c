@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <inttypes.h>
+#include <assert.h>
 #include "datamgr.h"
+
+_Static_assert(SET_MIN_TEMP, "SET_MIN_TEMP is not set.");
+_Static_assert(SET_MAX_TEMP, "SET_MAX_TEMP is not set.");
+_Static_assert(SET_MIN_TEMP < SET_MAX_TEMP, "SET_MIN_TEMP should be smaller than SET_MAX_TEMP.");
 
 int list_errno;
 
